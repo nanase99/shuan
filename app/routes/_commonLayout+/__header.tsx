@@ -1,9 +1,9 @@
-import { HeaderLogo } from "./HeaderLogo";
-import { Navigation } from "./Navigation";
+import { HeaderLogo } from "./__headerLogo";
+import { Navigation } from "./__navigation";
 
 export function Header() {
   return (
-    <header className="bg-gradient-to-b from-blue-700 to-blue-500 px-4 py-8 lg:px-14">
+    <header className="bg-gradient-to-b from-sky-600 to-sky-800 px-4 py-8 lg:px-14">
       <div className="max-w-screen-2xl mx-auto">
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center lg:gap-x-16">
@@ -11,7 +11,6 @@ export function Header() {
             <Navigation />
           </div>
         </div>
-        <div className="mt-14">Hello</div>
       </div>
     </header>
   );
