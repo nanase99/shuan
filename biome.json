@@ -11,7 +11,8 @@
       "style": {
         "useSelfClosingElements": "off",
         "noNonNullAssertion": "off",
-        "noUselessElse": "off"
+        "noUselessElse": "off",
+        "noParameterAssign": "warn"
       },
       "suspicious": {
         "noExplicitAny": "off",
