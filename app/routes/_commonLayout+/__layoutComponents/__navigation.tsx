@@ -7,7 +7,7 @@ const ROUTES = [
     label: "Overview",
   },
   { href: "/subjects", label: "教科" },
-  { href: "/weekly-plan", label: "週案" },
+  { href: "/timetable", label: "時間割" },
 ];
 
 export function Navigation() {

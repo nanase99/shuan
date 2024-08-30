@@ -1,5 +1,5 @@
 import { Outlet } from "@remix-run/react";
-import { Header } from "./__header";
+import { Header } from "./__layoutComponents";
 
 export default function Layout() {
   // TODO: ヘッダーを作成する

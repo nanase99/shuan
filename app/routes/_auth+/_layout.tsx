@@ -14,9 +14,6 @@ export default function Layout() {
         </div>
         <div className="flex items-center justify-center mt-8">
           <Outlet />
-          <ClerkLoading>
-            <Loader2 className="animate-spin text-muted-foreground" />
-          </ClerkLoading>
         </div>
       </div>
       <div className="hidden h-full lg:grid lg:place-items-center">
