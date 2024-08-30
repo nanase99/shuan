@@ -1,3 +1,5 @@
+import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/remix";
+import { Loader2 } from "lucide-react";
 import { HeaderLogo } from "./__headerLogo";
 import { Navigation } from "./__navigation";
 
@@ -10,6 +12,12 @@ export function Header() {
             <HeaderLogo />
             <Navigation />
           </div>
+          <ClerkLoaded>
+            <UserButton />
+          </ClerkLoaded>
+          <ClerkLoading>
+            <Loader2 className="size-8 animate-spin text-slate-400" />
+          </ClerkLoading>
         </div>
       </div>
     </header>

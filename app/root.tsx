@@ -10,6 +10,7 @@ import "ress";
 import { ClerkApp } from "@clerk/remix";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
 import type { LoaderFunction } from "@remix-run/node";
+import "./globals.css";
 
 export const loader: LoaderFunction = (args) => rootAuthLoader(args);
 
