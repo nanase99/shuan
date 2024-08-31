@@ -12,14 +12,15 @@
         "useSelfClosingElements": "off",
         "noNonNullAssertion": "off",
         "noUselessElse": "off",
-        "noParameterAssign": "warn"
+        "noParameterAssign": "off"
       },
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off"
       },
       "complexity": {
-        "noForEach": "off"
+        "noForEach": "off",
+        "noBannedTypes": "off"
       }
     }
   },
