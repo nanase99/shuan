@@ -1,7 +1,7 @@
 import { uuidv4 } from "@/libs";
 import { integer, pgTable, uuid, varchar } from "drizzle-orm/pg-core";
 
-export const units = pgTable("units", {
+export const unit = pgTable("units", {
   id: uuid("id")
     .$defaultFn(() => uuidv4())
     .primaryKey(),
@@ -9,5 +9,5 @@ export const units = pgTable("units", {
   classHours: integer("class_hours"),
 });
 
-export type InsertUnits = typeof units.$inferInsert;
-export type SelectUnits = typeof units.$inferSelect;
+export type InsertUnit = typeof unit.$inferInsert;
+export type SelectUnit = typeof unit.$inferSelect;
