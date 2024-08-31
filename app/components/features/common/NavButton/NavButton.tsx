@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs";
 import { NavLink } from "@remix-run/react";
 import { Button } from "../../../ui/Button";
 
