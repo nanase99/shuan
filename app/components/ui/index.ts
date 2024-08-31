@@ -1,5 +1,14 @@
 export { Button } from "./Button";
 export type { ButtonProps } from "./Button";
 
-export { NavButton } from "./NavButton";
-export type { NavButtonProps } from "./NavButton";
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "./Card";
+
+export { Input } from "./Input";
+export type { InputProps } from "./Input";
