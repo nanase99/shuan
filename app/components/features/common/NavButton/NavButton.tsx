@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { NavLink } from "@remix-run/react";
-import { Button } from "../Button";
+import { Button } from "../../../ui/Button";
 
 export type NavButtonProps = {
   href: string;
