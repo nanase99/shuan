@@ -20,7 +20,11 @@
       },
       "complexity": {
         "noForEach": "off",
-        "noBannedTypes": "off"
+        "noBannedTypes": "off",
+        "useArrowFunction": "off"
+      },
+      "performance": {
+        "noDelete": "off"
       }
     }
   },
