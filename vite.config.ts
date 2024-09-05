@@ -1,5 +1,5 @@
 import devServer, { defaultOptions } from "@hono/vite-dev-server";
-import adapter from "@hono/vite-dev-server/node";
+import adapter from "@hono/vite-dev-server/cloudflare";
 
 import { vitePlugin as remix } from "@remix-run/dev";
 import { flatRoutes } from "remix-flat-routes";
@@ -7,11 +7,11 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  // ssr: {
-  //   resolve: {
-  //     externalConditions: ["workerd", "worker"],
-  //   },
-  // },
+  ssr: {
+    resolve: {
+      externalConditions: ["workerd", "worker"],
+    },
+  },
   plugins: [
     remix({
       ignoredRouteFiles: ["**/*"],
