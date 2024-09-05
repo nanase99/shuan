@@ -28,7 +28,7 @@ app.use(
   },
   async (c, next) => {
     if (isProduction) {
-      const serverBuild = await import("./build/server");
+      const serverBuild = await import("../build/server");
       return remix({
         build: serverBuild,
         mode: "production",
