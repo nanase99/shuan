@@ -1,9 +1,4 @@
 import type { SelectSubject } from "@/db/schemas";
-import { http, HttpResponse } from "msw";
-
-export const getSubjects = http.get("http://localhost:5173/subjects", () =>
-  HttpResponse.json(subjects),
-);
 
 const subjects = [
   {

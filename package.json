@@ -22,6 +22,7 @@
     "@neondatabase/serverless": "0.9.4",
     "@radix-ui/react-label": "2.1.0",
     "@radix-ui/react-slot": "1.1.0",
+    "@remix-run/cloudflare": "2.11.2",
     "@remix-run/node": "2.11.2",
     "@remix-run/react": "2.11.2",
     "@remix-run/serve": "2.11.2",
@@ -29,11 +30,11 @@
     "clsx": "2.1.1",
     "dotenv": "16.4.5",
     "drizzle-orm": "0.33.0",
+    "hono": "4.5.11",
     "isbot": "4.1.0",
     "lucide-react": "0.435.0",
-    "msw": "2.4.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "ress": "5.0.2",
     "tailwind-merge": "2.5.2",
     "tailwindcss-animate": "1.0.7"
@@ -41,6 +42,8 @@
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@chromatic-com/storybook": "1.7.0",
+    "@hono/node-server": "1.11.1",
+    "@hono/vite-dev-server": "0.15.2",
     "@remix-run/dev": "2.11.2",
     "@storybook/addon-essentials": "8.2.9",
     "@storybook/addon-interactions": "8.2.9",
@@ -50,19 +53,17 @@
     "@storybook/react": "8.2.9",
     "@storybook/react-vite": "8.2.9",
     "@storybook/test": "8.2.9",
-    "@types/react": "18.2.25",
+    "@types/react": "18.3.5",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.19",
     "drizzle-kit": "0.24.2",
-    "postcss": "8.4.38",
+    "postcss": "8.4.44",
     "remix-flat-routes": "0.6.5",
+    "remix-hono": "0.0.16",
     "storybook": "8.2.9",
     "tailwindcss": "3.4.4",
-    "typescript": "5.1.6",
-    "vite": "5.1.0",
+    "typescript": "5.5.4",
+    "vite": "5.4.3",
     "vite-tsconfig-paths": "4.2.1"
-  },
-  "msw": {
-    "workerDirectory": ["public"]
   }
 }
