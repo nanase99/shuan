@@ -4,15 +4,23 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  json,
+  useLoaderData,
 } from "@remix-run/react";
 import "./tailwind.css";
 import "ress";
 import { ClerkApp } from "@clerk/remix";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
-import type { LoaderFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import "./globals.css";
-
-export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+export const loader = (args: LoaderFunctionArgs) =>
+  rootAuthLoader(args, () => {
+    return json({
+      ENV: {
+        APP_URL: process.env.APP_URL,
+      },
+    });
+  });
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -33,7 +41,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
-  return <Outlet />;
+  const data = useLoaderData<typeof loader>();
+  return (
+    <>
+      <Outlet />
+      <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+        dangerouslySetInnerHTML={{
+          __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+        }}
+      />
+    </>
+  );
 }
 
 export default ClerkApp(App);

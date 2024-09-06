@@ -6,6 +6,7 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev",
+    "staging": "API_ENV=staging vite",
     "start": "remix-serve ./build/server/index.js",
     "type": "tsc",
     "lint": "biome lint --write",

@@ -1,11 +1,14 @@
+import { subjectService } from "@/services";
 import { Hono } from "hono";
 
-export const getSubjects = new Hono().get("/", async (c) => {
-  // TODO: DBからの取得処理を実装する
-  return c.json({ test: "test" });
+const { getSubjects } = subjectService();
+
+export const subjects = new Hono().get("/", async (c) => {
+  const data = await getSubjects();
+  return c.json({ data });
 });
 
-export const mockGetSubjects = new Hono().get("/", (c) => {
+export const mockSubjects = new Hono().get("/", (c) => {
   return c.json({
     subject: [
       {

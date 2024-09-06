@@ -10,6 +10,7 @@ import { setMockRoutes, setRoutes } from "@/api/routes";
 
 const isProduction =
   process.env.NODE_ENV !== "development" || import.meta.env.PROD;
+const disableMock = isProduction || process.env.API_ENV === "staging";
 
 const app = new Hono();
 
@@ -17,7 +18,7 @@ let handler: RequestHandler | undefined;
 
 app.use(poweredBy());
 
-const routes = isProduction ? setRoutes(app) : setMockRoutes(app);
+const routes = disableMock ? setRoutes(app) : setMockRoutes(app);
 
 app.use(
   async (c, next) => {

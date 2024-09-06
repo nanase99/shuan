@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { getSubjects, mockGetSubjects } from "./getSubjects";
+import { mockSubjects, subjects } from "./subjects";
 
-export const subjectsRoute = new Hono().route("/", getSubjects);
+export const subjectsRoute = new Hono().route("/", subjects);
 
-export const mockSubjectsRoute = new Hono().route("/", mockGetSubjects);
+export const mockSubjectsRoute = new Hono().route("/", mockSubjects);
