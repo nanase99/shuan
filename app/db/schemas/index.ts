@@ -1,3 +1,3 @@
-export { subjects, type SelectSubjects, type InsertSubjects } from "./subjects";
+export { courses } from "./courses";
 
-export { unit, type SelectUnit, type InsertUnit } from "./units";
+export { subjects } from "./subjects";
