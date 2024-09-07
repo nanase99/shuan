@@ -1,12 +1,7 @@
-export class ClassHours {
-  private readonly _value: number;
+import { AbstractValueObject } from "./abstractValueObject";
 
-  constructor(value: number) {
-    this.validate(value);
-    this._value = value;
-  }
-
-  private validate(classHours: number): void {
+export class ClassHours extends AbstractValueObject<number, "ClassHours"> {
+  protected override validate(classHours: number): void {
     // TODO: バリデーションロジックを描く
   }
 }

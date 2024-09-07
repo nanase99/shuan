@@ -1,12 +1,7 @@
-export class CourseName {
-  private readonly _value: string;
+import { AbstractValueObject } from "./abstractValueObject";
 
-  constructor(value: string) {
-    this.validate(value);
-    this._value = value;
-  }
-
-  private validate(courseName: string): void {
+export class CourseName extends AbstractValueObject<string, "CourseName"> {
+  protected override validate(courseName: string): void {
     // TODO: バリデーションロジックを描く
   }
 }

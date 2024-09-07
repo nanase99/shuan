@@ -1,12 +1,7 @@
-export class Progress {
-  private readonly _value: number;
+import { AbstractValueObject } from "./abstractValueObject";
 
-  constructor(value: number) {
-    this.validate(value);
-    this._value = value;
-  }
-
-  private validate(progress: number): void {
+export class Progress extends AbstractValueObject<number, "Progress"> {
+  protected validate(progress: number): void {
     // TODO: バリデーションロジックを描く
   }
 }
