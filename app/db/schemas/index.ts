@@ -1,3 +1,3 @@
-export { courses } from "./courses";
+export { courses, coursesRelations } from "./courses";
 
-export { subjects } from "./subjects";
+export { subjects, subjectsRelations } from "./subjects";

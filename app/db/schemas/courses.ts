@@ -1,14 +1,17 @@
 import { relations } from "drizzle-orm";
-import { integer, numeric, pgTable, uuid, varchar } from "drizzle-orm/pg-core";
+import { integer, pgTable, uuid, varchar } from "drizzle-orm/pg-core";
 
 import { subjects } from "./subjects";
 
 export const courses = pgTable("courses", {
   id: uuid("id").primaryKey(),
-  subjectId: uuid("subject_id").references(() => subjects.id),
-  courseName: varchar("course_name", { length: 10 }),
-  classHours: integer("class_hours"),
-  progress: numeric("progress", { precision: 4, scale: 1 }),
+  subjectId: uuid("subject_id")
+    .references(() => subjects.id)
+    .notNull(),
+  courseName: varchar("course_name", { length: 10 }).notNull(),
+  classHours: integer("class_hours").notNull(),
+  progress: integer("progress").notNull(),
+  tag: varchar("tag", { length: 20 }).notNull(),
 });
 
 export const coursesRelations = relations(courses, ({ one }) => ({
