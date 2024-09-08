@@ -3,19 +3,21 @@ import type {
   CourseName,
   Progress,
 } from "@/domain/models/valueObjects";
-import { AbstractCourse } from "./abstractCourse";
+import { AbstractCourse, CourseTag } from "./abstractCourse";
 
+type Args = {
+  id: string;
+  subjectId: string;
+  courseName: CourseName;
+  classHours: ClassHours;
+  progress: Progress;
+};
 export class UncompletedCourse extends AbstractCourse {
   private _progress: Progress;
+  public override type = CourseTag.Uncompleted;
 
-  constructor(
-    id: string,
-    subjectId: string,
-    courseName: CourseName,
-    classHours: ClassHours,
-    progress: Progress,
-  ) {
-    super(id, subjectId, courseName, classHours);
+  constructor({ id, subjectId, courseName, classHours, progress }: Args) {
+    super({ id, subjectId, courseName, classHours });
     this._progress = progress;
   }
 

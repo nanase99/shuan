@@ -1,3 +1,5 @@
-import { AbstractSubject } from "./abstractSubject";
+import { AbstractSubject, SubjectTag } from "./abstractSubject";
 
-export class CompletedSubject extends AbstractSubject {}
+export class CompletedSubject extends AbstractSubject {
+  public override readonly type = SubjectTag.Completed;
+}

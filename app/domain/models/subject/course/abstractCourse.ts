@@ -1,17 +1,25 @@
 import type { ClassHours, CourseName } from "@/domain/models/valueObjects";
 
+type Args = {
+  id: string;
+  subjectId: string;
+  courseName: CourseName;
+  classHours: ClassHours;
+};
+
+export enum CourseTag {
+  Uncompleted = "Uncompleted",
+  Completed = "Completed",
+}
+
 export abstract class AbstractCourse {
   protected readonly _id: string;
   protected _subjectId: string;
   protected _courseName: CourseName;
   protected _classHours: ClassHours;
+  protected abstract readonly type: CourseTag;
 
-  constructor(
-    id: string,
-    subjectId: string,
-    courseName: CourseName,
-    classHours: ClassHours,
-  ) {
+  constructor({ id, subjectId, courseName, classHours }: Args) {
     this._id = id;
     this._subjectId = subjectId;
     this._courseName = courseName;

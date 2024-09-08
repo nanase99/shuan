@@ -1,6 +1,8 @@
 export {
+  SubjectTag,
   UncompletedSubject,
   CompletedSubject,
+  CourseTag,
   UncompletedCourse,
   CompletedCourse,
 } from "./subject";
