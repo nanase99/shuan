@@ -1,10 +1,12 @@
-import { subjectService } from "@/services";
+import { OrmSubjectRepository } from "@/repositories/subject";
+import { GetSubjectUseCase } from "@/useCases";
 import { Hono } from "hono";
 
-const { getSubjects } = subjectService();
+// TODO: リポジトリの切り替えを実装する
+const getSubjectUseCase = new GetSubjectUseCase(new OrmSubjectRepository());
 
 export const subjects = new Hono().get("/", async (c) => {
-  const data = await getSubjects();
+  const data = await getSubjectUseCase.execute();
   return c.json({ data });
 });
 

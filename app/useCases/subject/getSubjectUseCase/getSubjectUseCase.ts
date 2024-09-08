@@ -1,4 +1,4 @@
-import type { ISubjectRepository, Subject } from "@/domain/models";
+import type { ISubjectRepository } from "@/domain/models";
 
 export class GetSubjectUseCase {
   private _subjectRepository: ISubjectRepository;
@@ -7,7 +7,8 @@ export class GetSubjectUseCase {
     this._subjectRepository = subjectRepository;
   }
 
-  public getSubjects = async () => {
+  public execute = async () => {
+    // TODO: ドメインオブジェクトからDTOへ変換して返す
     return await this._subjectRepository.findMany();
   };
 }
