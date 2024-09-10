@@ -1,20 +1,23 @@
 import {
   InMemorySubjectRepository,
   MockSubjectRepository,
-  OrmSubjectRepository
+  NeonSubjectRepository,
 } from "@/repositories/subject";
 import { Hono } from "hono";
 
 const repository = (() => {
   switch (true) {
-    case process.env.DB_ENV === "stage": {
-      return new OrmSubjectRepository();
-    }
     case process.env.DB_ENV === "local": {
       return new InMemorySubjectRepository();
     }
-    default: {
+    case process.env.DB_ENV === "development": {
       return new MockSubjectRepository();
+    }
+    case process.env.DB_ENV === "stage" || import.meta.env.PROD: {
+      return new NeonSubjectRepository();
+    }
+    default: {
+      throw new Error("invalid repository");
     }
   }
 })();

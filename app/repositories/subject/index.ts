@@ -1,2 +1,3 @@
+export { MockSubjectRepository } from "./mockSubjectRepository/mockSubjectRepository";
 export { InMemorySubjectRepository } from "./inMemorySubjectRepository";
-export { OrmSubjectRepository } from "./ormSubjectRepository";
+export { NeonSubjectRepository } from "./neonSubjectRepository";
