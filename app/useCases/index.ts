@@ -1,1 +1,1 @@
-export { GetSubjectUseCase } from "./subject";
+export { getSubjectUseCase } from "./subject";

@@ -7,12 +7,15 @@ import {
   json,
   useLoaderData,
 } from "@remix-run/react";
-import "./tailwind.css";
 import "ress";
 import { ClerkApp } from "@clerk/remix";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
+
 import "./globals.css";
+import "./tailwind.css";
+import { QueryProvider } from "./providers";
+
 export const loader = (args: LoaderFunctionArgs) =>
   rootAuthLoader(args, () => {
     return json({
@@ -42,9 +45,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 function App() {
   const data = useLoaderData<typeof loader>();
+
   return (
     <>
-      <Outlet />
+      <QueryProvider>
+        <Outlet />
+      </QueryProvider>
       <script
         // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
         dangerouslySetInnerHTML={{

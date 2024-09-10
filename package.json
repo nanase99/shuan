@@ -6,7 +6,8 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev",
-    "stage": "API_ENV=staging vite",
+    "local": "DB_ENV=local vite",
+    "stage": "DB_ENV=stage vite",
     "start": "remix-serve ./build/server/index.js",
     "type": "tsc",
     "lint": "biome lint --write",
@@ -26,6 +27,7 @@
     "@remix-run/node": "2.11.2",
     "@remix-run/react": "2.11.2",
     "@remix-run/serve": "2.11.2",
+    "@tanstack/react-query": "5.55.4",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "dotenv": "16.4.5",
@@ -37,7 +39,8 @@
     "react-dom": "18.3.1",
     "ress": "5.0.2",
     "tailwind-merge": "2.5.2",
-    "tailwindcss-animate": "1.0.7"
+    "tailwindcss-animate": "1.0.7",
+    "use-dehydrated-state": "0.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",

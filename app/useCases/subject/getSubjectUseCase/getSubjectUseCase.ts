@@ -1,14 +1,34 @@
-import type { ISubjectRepository } from "@/domain/models";
+import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 
-export class GetSubjectUseCase {
-  private _subjectRepository: ISubjectRepository;
+import { apiClient } from "@/libs";
+import { subjectKeys } from "../subjectKeys";
 
-  constructor(subjectRepository: ISubjectRepository) {
-    this._subjectRepository = subjectRepository;
-  }
-
-  public execute = async () => {
+export const getSubjectUseCase = {
+  useGetSubjects: () => {
     // TODO: ドメインオブジェクトからDTOへ変換して返す
-    return await this._subjectRepository.findMany();
-  };
-}
+    const { data, isPending, isError } = useQuery({
+      queryKey: subjectKeys.all,
+      queryFn: fetchGetSubjects,
+    });
+    return { data, isPending, isError };
+  },
+
+  executePrefetch: async () => {
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery({
+      queryKey: subjectKeys.all,
+      queryFn: fetchGetSubjects,
+    });
+
+    return { dehydratedState: dehydrate(queryClient) };
+  },
+};
+
+const fetchGetSubjects = async () => {
+  const res = await apiClient.api.subjects.$get();
+
+  if (!res.ok) throw new Error("Failed to fetch subjects");
+
+  const { data } = await res.json();
+  return data;
+};
