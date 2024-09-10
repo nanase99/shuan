@@ -1,4 +1,4 @@
-import { Link } from "@/components/features/common/ui";
+import { Link } from "@/components/common/ui";
 
 export function HeaderLogo() {
   return (
