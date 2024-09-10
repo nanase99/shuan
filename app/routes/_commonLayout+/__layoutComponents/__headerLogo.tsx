@@ -1,8 +1,8 @@
-import { Link } from "@remix-run/react";
+import { Link } from "@/components/features/common/ui";
 
 export function HeaderLogo() {
   return (
-    <Link to="/">
+    <Link href="/">
       <div className="hidden lg:flex lg:items-center">
         <p className="font-semibold text-white text-2xl ml-2">Logo</p>
       </div>
