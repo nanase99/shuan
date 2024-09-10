@@ -1,6 +1,6 @@
 const UUID_FMT_ = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
 
-export const uuidv4 = () => {
+export const genUuid = () => {
   const chars = UUID_FMT_.split("");
   for (let i = 0, len = chars.length; i < len; i++) {
     switch (chars[i]) {
