@@ -5,20 +5,21 @@ import { staticAssets } from "remix-hono/cloudflare";
 import { remix } from "remix-hono/handler";
 
 import { setRoutes } from "@/api/routes";
+import type { ServerEnv } from "@/types/common";
 
 // TODO: assetsのパスを変換する
 const isProduction =
   process.env.NODE_ENV !== "development" || import.meta.env.PROD;
 
-const app = new Hono();
+const server = new Hono<ServerEnv>();
 
 let handler: RequestHandler | undefined;
 
-app.use(poweredBy());
+server.use(poweredBy());
 
-const routes = setRoutes(app);
+const routes = setRoutes(server);
 
-app.use(
+server.use(
   async (c, next) => {
     if (isProduction) {
       return staticAssets()(c, next);
@@ -58,6 +59,6 @@ app.use(
   },
 );
 
-export default app;
+export default server;
 
 export type AppType = typeof routes;

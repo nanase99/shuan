@@ -1,3 +1,5 @@
 import { clerkMiddleware } from "@hono/clerk-auth";
 
-export const authMiddleware = clerkMiddleware();
+export function authMiddleware() {
+  return clerkMiddleware();
+}

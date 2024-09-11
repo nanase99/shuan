@@ -1,12 +1,14 @@
 import { getAuth } from "@hono/clerk-auth";
 import { createMiddleware } from "hono/factory";
 
-export const handleAuthMiddleware = createMiddleware(async (c, next) => {
-  const auth = getAuth(c);
+export function handleAuthMiddleware() {
+  return createMiddleware(async (c, next) => {
+    const auth = getAuth(c);
 
-  if (!auth?.userId) {
-    return c.json({ error: "Unauthorized" }, 401);
-  }
+    if (!auth?.userId) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
 
-  await next;
-});
+    await next();
+  });
+}
