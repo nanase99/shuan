@@ -1,6 +1,6 @@
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 
-import { apiClient } from "@/libs";
+import { getApiClient } from "@/libs";
 import { subjectKeys } from "../subjectKeys";
 
 export const getSubjectUseCase = {
@@ -10,7 +10,7 @@ export const getSubjectUseCase = {
       queryKey: subjectKeys.all,
       queryFn: fetchGetSubjects,
     });
-    return { data, isPending, isError };
+    return { data: data?.subjects || [], isPending, isError };
   },
 
   executePrefetch: async () => {
@@ -25,6 +25,7 @@ export const getSubjectUseCase = {
 };
 
 const fetchGetSubjects = async () => {
+  const apiClient = getApiClient();
   const res = await apiClient.api.subjects.$get();
 
   if (!res.ok) throw new Error("Failed to fetch subjects");
