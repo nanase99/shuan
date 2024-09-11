@@ -1,28 +1,34 @@
+import { createFactory } from "hono/factory";
+
+import { RepositoryEnvType } from "@/enums/common";
 import {
   InMemorySubjectRepository,
   MockSubjectRepository,
   NeonSubjectRepository,
 } from "@/repositories/subject";
-import { Hono } from "hono";
+import type { ServerEnv } from "@/types/common";
 
-const repository = (() => {
-  switch (true) {
-    case process.env.DB_ENV === "local": {
-      return new InMemorySubjectRepository();
-    }
-    case process.env.DB_ENV === "development": {
-      return new MockSubjectRepository();
-    }
-    case process.env.DB_ENV === "stage" || import.meta.env.PROD: {
-      return new NeonSubjectRepository();
-    }
-    default: {
-      throw new Error("invalid repository");
-    }
-  }
-})();
+const factory = createFactory<ServerEnv>();
 
-export const subjects = new Hono().get("/", async (c) => {
+export const getSubjectsHandler = factory.createHandlers(async (c) => {
+  const repository = (() => {
+    switch (c.var.repositoryEnv) {
+      case RepositoryEnvType.Mock: {
+        return new MockSubjectRepository();
+      }
+      case RepositoryEnvType.InMemory: {
+        return new InMemorySubjectRepository();
+      }
+      case RepositoryEnvType.Stage:
+      case RepositoryEnvType.Production: {
+        return new NeonSubjectRepository(c.var.dbUrl);
+      }
+      default: {
+        return new MockSubjectRepository();
+      }
+    }
+  })();
+
   const data = await repository.findMany();
 
   return c.json({ data });

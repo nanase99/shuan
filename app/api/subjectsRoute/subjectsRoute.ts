@@ -1,4 +1,4 @@
 import { Hono } from "hono";
-import { subjects } from "./subjects";
+import { getSubjectsHandler } from "./subjects";
 
-export const subjectsRoute = new Hono().route("/", subjects);
+export const subjectsRoute = new Hono().get("/", ...getSubjectsHandler);
