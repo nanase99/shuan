@@ -23,7 +23,7 @@ server.use(staticAssetsMiddleware());
 
 server.use(authMiddleware());
 
-server.use(diMiddleware());
+server.use(...diMiddleware());
 
 const routes = setRoutes(server);
 

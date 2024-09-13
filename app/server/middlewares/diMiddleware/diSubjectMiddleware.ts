@@ -8,6 +8,7 @@ import {
   NeonSubjectRepository,
 } from "@/repositories/subject";
 import type { ServerEnv } from "@/types/common";
+import { GetSubjectUseCase } from "@/useCases";
 
 enum RepositoryEnvType {
   Mock = "Mock",
@@ -21,34 +22,32 @@ type ArgEnv = {
   DATABASE_URL: string;
 };
 
-export function diMiddleware(): MiddlewareHandler {
+export function diSubjectMiddleware(): MiddlewareHandler {
   return createMiddleware<ServerEnv>(async (c, next) => {
     const { REPOSITORY_ENV, DATABASE_URL } = env<
       ArgEnv,
       Context<ServerEnv, any, {}>
     >(c);
 
-    c.set(
-      "subjectRepository",
-      (() => {
-        switch (REPOSITORY_ENV) {
-          case RepositoryEnvType.InMemory: {
-            return new InMemorySubjectRepository();
-          }
-          case RepositoryEnvType.Stage:
-          case RepositoryEnvType.Production: {
-            return new NeonSubjectRepository(DATABASE_URL);
-          }
-          case RepositoryEnvType.Mock: {
-            return new MockSubjectRepository();
-          }
-          default: {
-            return new MockSubjectRepository();
-          }
+    const repository = (() => {
+      switch (REPOSITORY_ENV) {
+        case RepositoryEnvType.InMemory: {
+          return new InMemorySubjectRepository();
         }
-      })(),
-    );
+        case RepositoryEnvType.Stage:
+        case RepositoryEnvType.Production: {
+          return new NeonSubjectRepository(DATABASE_URL);
+        }
+        case RepositoryEnvType.Mock: {
+          return new MockSubjectRepository();
+        }
+        default: {
+          return new MockSubjectRepository();
+        }
+      }
+    })();
 
+    c.set("getSubjectUseCase", new GetSubjectUseCase(repository));
     await next();
   });
 }

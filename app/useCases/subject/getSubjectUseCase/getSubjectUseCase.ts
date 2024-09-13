@@ -1,35 +1,42 @@
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 
-import { getApiClient } from "@/libs";
+import { fromDomainSubjects } from "@/domain/dto";
+import type { ISubjectRepository } from "@/domain/models";
 import { subjectKeys } from "../subjectKeys";
 
-export const getSubjectUseCase = {
-  useGetSubjects: () => {
-    // TODO: ドメインオブジェクトからDTOへ変換して返す
+export class GetSubjectUseCase {
+  private _repository: ISubjectRepository;
+  private _fetchGetSubjects = async () => {
+    const res = await this._repository.findMany();
+
+    const subjectsDto = res.subjects.map((subject) =>
+      fromDomainSubjects(subject),
+    );
+
+    return { subjects: subjectsDto };
+  };
+
+  constructor(repository: ISubjectRepository) {
+    this._repository = repository;
+  }
+
+  public useGetSubjects = () => {
     const { data, isPending, isError } = useQuery({
       queryKey: subjectKeys.all,
-      queryFn: fetchGetSubjects,
+      queryFn: this._fetchGetSubjects,
     });
-    return { data: data?.subjects || [], isPending, isError };
-  },
+    return { data, isPending, isError };
+  };
 
-  executePrefetch: async () => {
+  public executePrefetch = async () => {
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery({
       queryKey: subjectKeys.all,
-      queryFn: fetchGetSubjects,
+      queryFn: this._fetchGetSubjects,
     });
 
-    return { dehydratedState: dehydrate(queryClient) };
-  },
-};
-
-const fetchGetSubjects = async () => {
-  const apiClient = getApiClient();
-  const res = await apiClient.api.subjects.$get();
-
-  if (!res.ok) throw new Error("Failed to fetch subjects");
-
-  const { data } = await res.json();
-  return data;
-};
+    return {
+      dehydratedState: dehydrate(queryClient),
+    };
+  };
+}

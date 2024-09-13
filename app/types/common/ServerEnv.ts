@@ -1,5 +1,5 @@
-import type { ISubjectRepository } from "@/domain/models";
+import type { SubjectUseCaseType } from "@/useCases/subject";
 
 export type ServerEnv = {
-  Variables: { isProduction: boolean; subjectRepository: ISubjectRepository };
+  Variables: { isProduction: boolean } & SubjectUseCaseType;
 };
