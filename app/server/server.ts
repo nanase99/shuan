@@ -2,13 +2,13 @@ import { Hono } from "hono";
 import { contextStorage } from "hono/context-storage";
 import { poweredBy } from "hono/powered-by";
 
-import type { ServerEnv } from "@/types/common";
 import {
   authMiddleware,
   diMiddleware,
   remixMiddleware,
   staticAssetsMiddleware,
 } from "./middlewares";
+import type { ServerEnv } from "./serverUtil";
 
 // TODO: assetsのパスを変換する
 

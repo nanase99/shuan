@@ -1,6 +1,6 @@
 import { getContext } from "hono/context-storage";
 
-import type { ServerEnv } from "@/types/common";
+import type { ServerEnv } from "@/server/serverUtil";
 
 const context = getContext<ServerEnv>();
 

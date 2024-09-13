@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
-    "dev": "REPOSITORY_ENV=development remix vite:dev",
+    "dev": "REPOSITORY_ENV=mock remix vite:dev",
     "local": "REPOSITORY_ENV=local vite",
     "stage": "REPOSITORY_ENV=stage vite",
     "start": "remix-serve ./build/server/index.js",

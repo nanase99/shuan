@@ -3,7 +3,7 @@ import type { MiddlewareHandler } from "hono";
 import { createMiddleware } from "hono/factory";
 import { remix } from "remix-hono/handler";
 
-import type { ServerEnv } from "@/types/common";
+import type { ServerEnv } from "@/server/serverUtil";
 
 let handler: RequestHandler | undefined;
 

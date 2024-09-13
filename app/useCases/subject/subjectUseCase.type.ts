@@ -1,5 +1,5 @@
 import type { GetSubjectUseCase } from "./getSubjectUseCase";
 
-export type SubjectUseCaseType = {
+export type SubjectUseCase = {
   getSubjectUseCase: GetSubjectUseCase;
 };

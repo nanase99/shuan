@@ -1,1 +1,1 @@
-export { type SubjectUseCaseType, GetSubjectUseCase } from "./subject";
+export { type SubjectUseCase, GetSubjectUseCase } from "./subject";

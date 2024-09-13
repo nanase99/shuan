@@ -7,20 +7,8 @@ import {
   MockSubjectRepository,
   NeonSubjectRepository,
 } from "@/repositories/subject";
-import type { ServerEnv } from "@/types/common";
+import { type ArgEnv, Repository, type ServerEnv } from "@/server/serverUtil";
 import { GetSubjectUseCase } from "@/useCases";
-
-enum RepositoryEnvType {
-  Mock = "Mock",
-  InMemory = "InMemory",
-  Stage = "Stage",
-  Production = "Production",
-}
-
-type ArgEnv = {
-  REPOSITORY_ENV: RepositoryEnvType;
-  DATABASE_URL: string;
-};
 
 export function diSubjectMiddleware(): MiddlewareHandler {
   return createMiddleware<ServerEnv>(async (c, next) => {
@@ -31,14 +19,14 @@ export function diSubjectMiddleware(): MiddlewareHandler {
 
     const repository = (() => {
       switch (REPOSITORY_ENV) {
-        case RepositoryEnvType.InMemory: {
+        case Repository.Local: {
           return new InMemorySubjectRepository();
         }
-        case RepositoryEnvType.Stage:
-        case RepositoryEnvType.Production: {
+        case Repository.Stage:
+        case Repository.Production: {
           return new NeonSubjectRepository(DATABASE_URL);
         }
-        case RepositoryEnvType.Mock: {
+        case Repository.Mock: {
           return new MockSubjectRepository();
         }
         default: {
