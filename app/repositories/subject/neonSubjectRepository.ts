@@ -8,8 +8,8 @@ import type { ISubjectRepository } from "@/domain/models";
 export class NeonSubjectRepository implements ISubjectRepository {
   private _ormClient: NeonHttpDatabase<typeof schema>;
 
-  constructor(url: string) {
-    this._ormClient = drizzle(neon(url), { schema });
+  constructor(databaseUrl: string) {
+    this._ormClient = drizzle(neon(databaseUrl), { schema });
   }
 
   findMany = async () => {

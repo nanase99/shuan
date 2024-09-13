@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
-    "dev": "DB_ENV=development remix vite:dev",
-    "local": "DB_ENV=local vite",
-    "stage": "DB_ENV=stage vite",
+    "dev": "REPOSITORY_ENV=development remix vite:dev",
+    "local": "REPOSITORY_ENV=local vite",
+    "stage": "REPOSITORY_ENV=stage vite",
     "start": "remix-serve ./build/server/index.js",
     "type": "tsc",
     "lint": "biome lint --write",
