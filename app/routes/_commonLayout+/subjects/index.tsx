@@ -1,7 +1,7 @@
 import { json } from "@remix-run/node";
 
-import { SubjectCard } from "@/components/subjects";
-import { diContainer } from "@/libs";
+import { diContainer } from "@/features/common/libs";
+import { SubjectCard } from "@/features/subject/components";
 
 const getSubjectUseCase = diContainer.getSubjectUseCase();
 const { useGetSubjects, executePrefetch } = getSubjectUseCase;

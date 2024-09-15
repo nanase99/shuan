@@ -13,8 +13,7 @@ import { rootAuthLoader } from "@clerk/remix/ssr.server";
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
 import "./globals.css";
-import "./tailwind.css";
-import { QueryProvider } from "./providers";
+import { QueryProvider } from "./features/common/components/providers";
 
 export const loader = (args: LoaderFunctionArgs) =>
   rootAuthLoader(args, () => {

@@ -1,4 +1,4 @@
-import { NavButton } from "@/components/common/ui";
+import { NavButton } from "@/features/common/components/ui";
 import { useLocation } from "@remix-run/react";
 
 const ROUTES = [

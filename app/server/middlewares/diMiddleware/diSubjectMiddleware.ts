@@ -6,9 +6,9 @@ import {
   InMemorySubjectRepository,
   MockSubjectRepository,
   NeonSubjectRepository,
-} from "@/repositories/subject";
+} from "@/features/subject/repositories";
+import { GetSubjectUseCase } from "@/features/subject/useCases";
 import { type ArgEnv, Repository, type ServerEnv } from "@/server/serverUtil";
-import { GetSubjectUseCase } from "@/useCases";
 
 export function diSubjectMiddleware(): MiddlewareHandler {
   return createMiddleware<ServerEnv>(async (c, next) => {

@@ -1,4 +1,4 @@
-import type { SubjectUseCase } from "@/useCases/subject";
+import type { SubjectUseCase } from "@/features/subject/useCases";
 
 export enum Repository {
   Mock = "mock",
