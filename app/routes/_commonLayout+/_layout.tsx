@@ -8,7 +8,9 @@ export default function Layout() {
     <>
       <Header />
       <main>
-        <Outlet />
+        <div className="p-4">
+          <Outlet />
+        </div>
       </main>
     </>
   );
