@@ -1,20 +1,17 @@
 import { json } from "@remix-run/node";
 
-import { diContainer } from "@/features/common/libs";
 import { SubjectCard } from "@/features/subject/components";
+import { fetchGetSubjects } from "@/features/subject/fetch/fetchGetSubjects";
 
-const getSubjectUseCase = diContainer.getSubjectUseCase();
-const { useGetSubjects, executePrefetch } = getSubjectUseCase;
+const { useGetSubjects, prefetchGetSubjects } = fetchGetSubjects();
 
 export const loader = async () => {
-  const res = await executePrefetch();
+  const res = await prefetchGetSubjects();
   return json(res);
 };
 
 export default function Index() {
   const { data } = useGetSubjects();
-
-  console.log(data);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

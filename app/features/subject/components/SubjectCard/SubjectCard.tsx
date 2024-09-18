@@ -17,10 +17,12 @@ export type SubjectCardProps = {
   subject: any;
 };
 
-type Mode = "view" | "edit";
-
 export function SubjectCard({ subject }: SubjectCardProps) {
-  const [mode, setMode] = useState<Mode>("view");
+  const [isEdit, setIsEdit] = useState(false);
+  const handleEdit = () => setIsEdit(true);
+  const handleSave = () => {
+    setIsEdit(false);
+  };
 
   return (
     <Card className="bg-orange-100 relative">
@@ -31,10 +33,10 @@ export function SubjectCard({ subject }: SubjectCardProps) {
       >
         <Trash2 className="size-6" />
       </Button>
-      {mode === "view" ? (
-        <ViewMode subject={subject} />
+      {isEdit ? (
+        <EditMode subject={subject} onSaveClick={handleSave} />
       ) : (
-        <EditMode subject={subject} />
+        <ViewMode subject={subject} onEditClick={handleEdit} />
       )}
     </Card>
   );
@@ -42,7 +44,8 @@ export function SubjectCard({ subject }: SubjectCardProps) {
 
 function ViewMode({
   subject: { subjectName, courses },
-}: { subject: SubjectDto }) {
+  onEditClick,
+}: { subject: SubjectDto; onEditClick: () => void }) {
   return (
     <>
       <CardHeader className="flex-row items-center justify-between">
@@ -53,13 +56,13 @@ function ViewMode({
         <Label>時数</Label>
         {courses?.map((course) => (
           <Fragment key={course.id}>
-            <Input defaultValue={course.courseName} />
-            <Input type="number" defaultValue={course.classHours} min={0} />
+            <p> {course.courseName}</p>
+            <p>{course.classHours}</p>
           </Fragment>
         ))}
       </CardContent>
       <CardFooter className="flex justify-end">
-        <Button>編集</Button>
+        <Button onClick={onEditClick}>編集</Button>
       </CardFooter>
     </>
   );
@@ -67,7 +70,8 @@ function ViewMode({
 
 function EditMode({
   subject: { subjectName, courses },
-}: { subject: SubjectDto }) {
+  onSaveClick,
+}: { subject: SubjectDto; onSaveClick: () => void }) {
   return (
     <>
       <CardHeader className="flex-row items-center justify-between">
@@ -84,7 +88,7 @@ function EditMode({
         ))}
       </CardContent>
       <CardFooter className="flex justify-end">
-        <Button>編集</Button>
+        <Button onClick={onSaveClick}>保存</Button>
       </CardFooter>
     </>
   );

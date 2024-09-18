@@ -1,1 +1,1 @@
-export { SubjectCard, type SubjectCardProps } from "./ui/SubjectCard";
+export { SubjectCard, type SubjectCardProps } from "./SubjectCard";
