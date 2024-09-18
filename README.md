@@ -1,40 +1,32 @@
-# Welcome to Remix!
+# 週案アプリ
 
-- 📖 [Remix docs](https://remix.run/docs)
+## 概要
+小学校教員の授業計画進捗をデジタルで管理するアプリケーションです。
+年度末までに完了させるべき授業を、週単位で効率よく管理し、変更が生じた場合でも柔軟に対応できるよう支援します。
 
-## Development
+## 背景
+小学校の教員は、年度ごとに決められた教育課程に基づき授業を行い、週ごとの進捗管理を行っています。
+現在、多くの教員がこれを紙媒体で管理しており、以下のような課題があります。 
+- 行事や授業変更が発生すると、紙の記録を手書きで修正する必要がある。
+- 計画の変更が頻繁に発生すると、進捗管理が煩雑になり、授業が不足するリスクが高まる。
 
-Run the dev server:
+## 目的
+このアプリは、授業進捗をデジタルで管理し、以下の機能を提供することで教員の負担軽減を目指します。
+- 授業計画の柔軟な修正対応
+- 授業不足や進捗の遅れを早期に通知
+- 行事や特別授業による変更にも迅速に対応
 
-```shellscript
-npm run dev
-```
+## 主な機能
+- 週単位の進捗管理：年間の授業計画に基づいて、週ごとの進捗を管理します。
+- 変更への柔軟な対応：授業の変更が発生した場合でも、関連する進捗を自動で再計算し反映します。
+- 授業不足の通知：予定よりも授業数が不足している場合は、早期に通知を行います。
 
-## Deployment
 
-First, build your app for production:
+## ユビキタス弦&イベントストーミング
+https://www.figma.com/board/svOSra44e552GrWWwO4B9U/%E9%80%B1%E6%A1%88%E3%82%A2%E3%83%97%E3%83%AA%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%82%B9%E3%83%88%E3%83%BC%E3%83%9F%E3%83%B3%E3%82%B0?node-id=0-1&t=W7raXWaR8rSUubWJ-1
 
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+## サンプル
+https://github.com/user-attachments/assets/1fe76900-7114-42e7-8ef1-db62504b9243
+https://github.com/user-attachments/assets/5ee9fc6a-7228-4c89-81c1-a79e2856e62a
+https://github.com/user-attachments/assets/8a1120dc-56dc-4b03-b62d-ccc2f76da61f
+https://github.com/user-attachments/assets/373932b0-6b15-4f26-b7ab-cdbf6f42fd38
