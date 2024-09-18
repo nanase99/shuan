@@ -26,7 +26,7 @@
 https://www.figma.com/board/svOSra44e552GrWWwO4B9U/%E9%80%B1%E6%A1%88%E3%82%A2%E3%83%97%E3%83%AA%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%82%B9%E3%83%88%E3%83%BC%E3%83%9F%E3%83%B3%E3%82%B0?node-id=0-1&t=W7raXWaR8rSUubWJ-1
 
 ## サンプル
-https://github.com/user-attachments/assets/1fe76900-7114-42e7-8ef1-db62504b9243
-https://github.com/user-attachments/assets/5ee9fc6a-7228-4c89-81c1-a79e2856e62a
-https://github.com/user-attachments/assets/8a1120dc-56dc-4b03-b62d-ccc2f76da61f
-https://github.com/user-attachments/assets/373932b0-6b15-4f26-b7ab-cdbf6f42fd38
+![教科入力](https://github.com/user-attachments/assets/1fe76900-7114-42e7-8ef1-db62504b9243)
+![進捗確認](https://github.com/user-attachments/assets/5ee9fc6a-7228-4c89-81c1-a79e2856e62a)
+![時間割テンプレート](https://github.com/user-attachments/assets/8a1120dc-56dc-4b03-b62d-ccc2f76da61f)
+![週案](https://github.com/user-attachments/assets/373932b0-6b15-4f26-b7ab-cdbf6f42fd38)
