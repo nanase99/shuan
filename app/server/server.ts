@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { contextStorage } from "hono/context-storage";
 import { poweredBy } from "hono/powered-by";
 
+import { setRoutes } from "./apiRoutes";
 import {
   authMiddleware,
   diMiddleware,
@@ -14,8 +14,6 @@ import type { ServerEnv } from "./serverUtil";
 
 const server = new Hono<ServerEnv>();
 
-server.use(contextStorage());
-
 server.use(poweredBy());
 
 server.use(staticAssetsMiddleware());
@@ -24,6 +22,10 @@ server.use(authMiddleware());
 
 server.use(...diMiddleware());
 
+const routes = setRoutes(server);
+
 server.use(remixMiddleware());
 
 export default server;
+
+export type AppType = typeof routes;

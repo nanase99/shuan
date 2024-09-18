@@ -1,3 +1,3 @@
 export { cn } from "./cn";
-export { diContainer } from "./diContainer";
+export { getApiClient } from "./getApiClient";
 export { genUuid } from "./genUuid";
