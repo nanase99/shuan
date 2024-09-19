@@ -30,9 +30,7 @@ export function SubjectCard({ subject }: SubjectCardProps) {
         variant="outline"
         size="sm"
         className="absolute right-2 top-2 bg-transparent hover:bg-white/40 focus:outline-white/30"
-      >
-        <Trash2 className="size-6" />
-      </Button>
+      ></Button>
       {isEdit ? (
         <EditMode subject={subject} onSaveClick={handleSave} />
       ) : (
@@ -49,15 +47,18 @@ function ViewMode({
   return (
     <>
       <CardHeader className="flex-row items-center justify-between">
-        <CardTitle>{subjectName}</CardTitle>
+        <CardTitle className="flex w-full">
+          <span className="flex-1">{subjectName}</span>
+          <Trash2 className="size-6" />
+        </CardTitle>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2">
-        <Label>単元</Label>
-        <Label>時数</Label>
+        <Label className="font-semibold">単元</Label>
+        <Label className="font-semibold">時数</Label>
         {courses?.map((course) => (
           <Fragment key={course.id}>
-            <p> {course.courseName}</p>
-            <p>{course.classHours}</p>
+            <p className="py-2 px-3"> {course.courseName}</p>
+            <p className="py-2 px-3">{course.classHours}</p>
           </Fragment>
         ))}
       </CardContent>
@@ -75,15 +76,23 @@ function EditMode({
   return (
     <>
       <CardHeader className="flex-row items-center justify-between">
-        <CardTitle>{subjectName}</CardTitle>
+        <Input
+          className="text-2xl font-semibold p-0 h-6"
+          defaultValue={subjectName}
+        />
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2">
-        <Label>単元</Label>
-        <Label>時数</Label>
+        <Label className="font-semibold">単元</Label>
+        <Label className="font-semibold">時数</Label>
         {courses?.map((course) => (
           <Fragment key={course.id}>
-            <Input defaultValue={course.courseName} />
-            <Input type="number" defaultValue={course.classHours} min={0} />
+            <Input defaultValue={course.courseName} className="text-base" />
+            <Input
+              type="number"
+              defaultValue={course.classHours}
+              min={0}
+              className="text-base"
+            />
           </Fragment>
         ))}
       </CardContent>
