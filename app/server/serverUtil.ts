@@ -13,5 +13,9 @@ export type ArgEnv = {
 };
 
 export type ServerEnv = {
-  Variables: { isProduction: boolean } & SubjectUseCase;
+  Bindings: {
+    CLERK_PUBLISHABLE_KEY: string;
+    CLERK_SECRET_KEY: string;
+  };
+  Variables: SubjectUseCase;
 };

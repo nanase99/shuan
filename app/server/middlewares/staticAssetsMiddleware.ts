@@ -6,8 +6,7 @@ import type { ServerEnv } from "@/server/serverUtil";
 
 export function staticAssetsMiddleware(): MiddlewareHandler {
   return createMiddleware<ServerEnv>(async (c, next) => {
-    const isProduction = c.var.isProduction;
-    if (isProduction) {
+    if (process.env.NODE_ENV !== "development" || import.meta.env.PROD) {
       return staticAssets()(c as any, next);
     }
     await next();

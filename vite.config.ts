@@ -1,3 +1,4 @@
+import path from "node:path";
 import devServer, { defaultOptions } from "@hono/vite-dev-server";
 import adapter from "@hono/vite-dev-server/cloudflare";
 
@@ -6,10 +7,21 @@ import { flatRoutes } from "remix-flat-routes";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   ssr: {
     resolve: {
       externalConditions: ["workerd", "worker"],
+    },
+  },
+  /**
+   * workerdランタイムでpostgres.jsパッケージを使用するとエラーになるためエントリポイントを変更する
+   * @see https://github.com/remix-run/remix/issues/9245#issuecomment-2179517678
+   */
+  resolve: {
+    alias: {
+      ...(mode === "development" && {
+        postgres: path.resolve(__dirname, "node_modules/postgres/src/index.js"),
+      }),
     },
   },
   plugins: [
@@ -45,4 +57,4 @@ export default defineConfig({
       injectClientScript: false,
     }),
   ],
-});
+}));

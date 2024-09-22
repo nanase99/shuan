@@ -9,8 +9,7 @@ let handler: RequestHandler | undefined;
 
 export function remixMiddleware(): MiddlewareHandler {
   return createMiddleware<ServerEnv>(async (c, next) => {
-    const isProduction = c.var.isProduction;
-    if (isProduction) {
+    if (process.env.NODE_ENV !== "development" || import.meta.env.PROD) {
       const serverBuild = await import("@/../build/server");
       return remix({
         build: serverBuild,
@@ -29,7 +28,7 @@ export function remixMiddleware(): MiddlewareHandler {
       if (!handler) {
         // @ts-expect-error it's not typed
         const build = await import("virtual:remix/server-build");
-        const { createRequestHandler } = await import("@remix-run/node");
+        const { createRequestHandler } = await import("@remix-run/cloudflare");
         handler = createRequestHandler(build, "development");
       }
       const remixContext = {

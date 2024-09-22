@@ -1,4 +1,4 @@
-import { json } from "@remix-run/node";
+import { json } from "@remix-run/cloudflare";
 
 import { SubjectCard } from "@/features/subject/components";
 import { fetchGetSubjects } from "@/features/subject/fetch/fetchGetSubjects";
