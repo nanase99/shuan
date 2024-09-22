@@ -23,4 +23,31 @@ export class LocalSubjectRepository implements ISubjectRepository {
 
     return { subjects };
   };
+
+  create = async (subject: Subject) => {
+    const subjectDto = SubjectDto.fromDomain(subject);
+    const { courses: coursesData, ...subjectData } = subjectDto;
+
+    const subjectsResult = await this._ormClient
+      .insert(schema.subjects)
+      .values(subjectData)
+      .returning();
+
+    const coursesResults = await this._ormClient
+      .insert(schema.courses)
+      .values(coursesData)
+      .returning();
+
+    return SubjectDto.toDomain({
+      ...subjectsResult[0],
+      courses: coursesResults,
+    });
+  };
+
+  deleteMany = async () => {
+    await Promise.all([
+      this._ormClient.delete(schema.subjects),
+      this._ormClient.delete(schema.courses),
+    ]);
+  };
 }

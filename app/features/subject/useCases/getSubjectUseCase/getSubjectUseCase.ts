@@ -1,4 +1,4 @@
-import { fromDomainSubjects } from "@/features/subject/domain/dto";
+import { SubjectDto } from "@/features/subject/domain/dto";
 import type { ISubjectRepository } from "@/features/subject/domain/models";
 
 export class GetSubjectUseCase {
@@ -12,7 +12,7 @@ export class GetSubjectUseCase {
     const res = await this._repository.findMany();
 
     const subjectsDto = res.subjects.map((subject) =>
-      fromDomainSubjects(subject),
+      SubjectDto.fromDomain(subject),
     );
 
     return { subjects: subjectsDto };

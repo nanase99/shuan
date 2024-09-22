@@ -33,7 +33,7 @@ export function diSubjectMiddleware(): MiddlewareHandler {
           return new NeonSubjectRepository(DATABASE_URL);
         }
         default: {
-          return new MockSubjectRepository();
+          throw new Error(`invalid REPOSITORY_ENV ${REPOSITORY_ENV}`);
         }
       }
     })();

@@ -1,16 +1,25 @@
+import type {
+  ISubjectRepository,
+  Subject,
+} from "@/features/subject/domain/models";
 import {
   ClassHours,
   CompletedCourse,
   CompletedSubject,
   CourseName,
   Progress,
-  type Subject,
   SubjectName,
   UncompletedCourse,
   UncompletedSubject,
 } from "@/features/subject/domain/models";
 
-export const subjects: { subjects: Subject[] } = {
+export class MockSubjectRepository implements ISubjectRepository {
+  findMany = async () => mockSubjects;
+  create = async (subject: Subject) => subject;
+  deleteMany = async () => {};
+}
+
+const mockSubjects: { subjects: Subject[] } = {
   subjects: [
     new UncompletedSubject({
       id: "3539fc2e-c005-49bc-a12a-91bd4745e1a4",
