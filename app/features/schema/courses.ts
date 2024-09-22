@@ -6,7 +6,7 @@ import { subjects } from "./subjects";
 export const courses = pgTable("courses", {
   id: uuid("id").primaryKey(),
   subjectId: uuid("subject_id")
-    .references(() => subjects.id)
+    .references(() => subjects.id, { onDelete: "cascade" })
     .notNull(),
   courseName: varchar("course_name", { length: 10 }).notNull(),
   classHours: integer("class_hours").notNull(),
