@@ -16,7 +16,7 @@ type Args = {
 
 export class UncompletedSubject extends AbstractSubject {
   private _progress: Progress;
-  public override readonly type = SubjectTag.Uncompleted;
+  public override readonly tag = SubjectTag.Uncompleted;
 
   constructor({ id, subjectName, classHours, courses, progress }: Args) {
     super({ id, subjectName, classHours, courses });

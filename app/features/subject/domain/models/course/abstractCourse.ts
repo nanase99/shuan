@@ -17,7 +17,7 @@ export abstract class AbstractCourse {
   protected _subjectId: string;
   protected _courseName: CourseName;
   protected _classHours: ClassHours;
-  protected abstract readonly type: CourseTag;
+  protected abstract readonly tag: CourseTag;
 
   constructor({ id, subjectId, courseName, classHours }: Args) {
     this._id = id;
