@@ -2,8 +2,8 @@ import type { SubjectUseCase } from "@/features/subject/useCases";
 
 export enum Repository {
   Mock = "mock",
+  Memory = "memory",
   Local = "local",
-  Stage = "stage",
   Production = "production",
 }
 

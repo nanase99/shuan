@@ -1,0 +1,1 @@
+export { LocalSubjectRepository } from "./localSubjectRepository";

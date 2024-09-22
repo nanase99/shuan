@@ -4,6 +4,7 @@ import { createMiddleware } from "hono/factory";
 
 import {
   InMemorySubjectRepository,
+  LocalSubjectRepository,
   MockSubjectRepository,
   NeonSubjectRepository,
 } from "@/features/subject/repositories";
@@ -19,15 +20,17 @@ export function diSubjectMiddleware(): MiddlewareHandler {
 
     const repository = (() => {
       switch (REPOSITORY_ENV) {
-        case Repository.Local: {
-          return new InMemorySubjectRepository();
-        }
-        case Repository.Stage:
-        case Repository.Production: {
-          return new NeonSubjectRepository(DATABASE_URL);
-        }
         case Repository.Mock: {
           return new MockSubjectRepository();
+        }
+        case Repository.Memory: {
+          return new InMemorySubjectRepository();
+        }
+        case Repository.Local: {
+          return new LocalSubjectRepository(DATABASE_URL);
+        }
+        case Repository.Production: {
+          return new NeonSubjectRepository(DATABASE_URL);
         }
         default: {
           return new MockSubjectRepository();
