@@ -11,10 +11,8 @@ export class GetSubjectUseCase {
   public execute = async () => {
     const res = await this._repository.findMany();
 
-    const subjectsDto = res.subjects.map((subject) =>
-      SubjectDto.fromDomain(subject),
-    );
+    const subjectsDto = res.map((subject) => SubjectDto.fromDomain(subject));
 
-    return { subjects: subjectsDto };
+    return subjectsDto;
   };
 }

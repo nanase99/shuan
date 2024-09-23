@@ -15,7 +15,7 @@ export default function Index() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      {data?.subjects.map((subject) => {
+      {data?.map((subject) => {
         return <SubjectCard key={subject.id} subject={subject} />;
       })}
     </div>
