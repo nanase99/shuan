@@ -5,7 +5,6 @@ import { setRoutes } from "./apiRoutes";
 import {
   authMiddleware,
   diMiddleware,
-  remixMiddleware,
   staticAssetsMiddleware,
 } from "./middlewares";
 import type { ServerEnv } from "./serverUtil";
@@ -23,8 +22,6 @@ server.use(authMiddleware());
 server.use(...diMiddleware());
 
 const routes = setRoutes(server);
-
-server.use(remixMiddleware());
 
 export default server;
 
