@@ -1,3 +1,4 @@
+export { AddButton, type AddButtonProps } from "./AddButton";
 export { Button, type ButtonProps } from "./Button";
 export {
   Card,
