@@ -8,10 +8,14 @@ import {
 import "ress";
 import { ClerkApp } from "@clerk/remix";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
-import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/cloudflare";
 
-import "./globals.css";
 import { QueryProvider } from "./features/common/components/providers";
+import stylesheet from "./tailwind.css?url";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 export const loader = (args: LoaderFunctionArgs) => rootAuthLoader(args);
 
