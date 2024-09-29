@@ -12,4 +12,5 @@ export { Input, type InputProps } from "./Input";
 export { Label } from "./Label";
 export { Link, type LinkProps } from "./Link";
 export { NavButton, type NavButtonProps } from "./NavButton";
+export { Typography, type TypographyProps } from "./Typography";
 export { UserIcon } from "./UserIcon";
