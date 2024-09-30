@@ -10,6 +10,7 @@
     "local": "REPOSITORY_ENV=local remix vite:dev",
     "start": "wrangler pages dev ./build/client",
     "type": "tsc",
+    "routes": "remix routes",
     "lint": "biome lint --write",
     "format": "biome format --write",
     "check": "biome check --write --unsafe",
