@@ -1,1 +1,1 @@
-export { Header } from "./__header";
+export { Header } from "./header";
