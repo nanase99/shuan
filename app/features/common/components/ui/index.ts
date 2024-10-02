@@ -3,6 +3,7 @@ export * from "./Button";
 export * from "./Card";
 export * from "./Form";
 export * from "./Input";
+export * from "./InputWithLabel";
 export * from "./Label";
 export * from "./Link";
 export * from "./NavButton";
