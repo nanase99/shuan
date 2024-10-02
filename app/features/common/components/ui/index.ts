@@ -2,6 +2,7 @@ export * from "./AddButton";
 export * from "./Button";
 export * from "./Card";
 export * from "./Form";
+export * from "./FormInput";
 export * from "./Input";
 export * from "./InputWithLabel";
 export * from "./Label";
