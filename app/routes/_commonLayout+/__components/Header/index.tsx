@@ -1,6 +1,6 @@
 import { UserIcon } from "@/features/common/components/ui";
-import { HeaderLogo } from "./headerLogo";
-import { Navigation } from "./navigation";
+import { HeaderLogo } from "./HeaderLogo";
+import { Navigation } from "./Navigation";
 
 export function Header() {
   return (
