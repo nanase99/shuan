@@ -6,8 +6,8 @@ import {
   SubjectName,
   SubjectTag,
   UncompletedSubject,
-} from "../../models";
-import { CourseDto } from "../courseDto";
+} from "../models";
+import { CourseDto } from "./courseDto";
 
 export class SubjectDto {
   public readonly id: string;

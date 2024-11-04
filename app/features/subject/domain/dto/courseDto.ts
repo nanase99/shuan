@@ -1,3 +1,4 @@
+import type { RowState } from "@/features/common/enums";
 import {
   ClassHours,
   CompletedCourse,
@@ -15,6 +16,7 @@ export class CourseDto {
   public readonly classHours: number;
   public readonly progress: number;
   public readonly tag: string;
+  public readonly rowState: string;
 
   constructor(courseDto: CourseDto) {
     this.id = courseDto.id;
@@ -23,6 +25,7 @@ export class CourseDto {
     this.classHours = courseDto.classHours;
     this.progress = courseDto.progress;
     this.tag = courseDto.tag;
+    this.rowState = courseDto.rowState;
   }
 
   public static fromDomain = (course: Course): CourseDto => {
@@ -47,6 +50,7 @@ export class CourseDto {
       courseName: course.courseName.value,
       classHours: course.classHours.value,
       tag: course.tag,
+      rowState: course.rowState,
       ...propsByTag,
     });
   };
@@ -60,6 +64,7 @@ export class CourseDto {
           courseName: new CourseName(courseDto.courseName),
           classHours: new ClassHours(courseDto.classHours),
           progress: new Progress(courseDto.progress),
+          rowState: courseDto.rowState as RowState,
         });
       }
       case CourseTag.Completed: {
@@ -68,6 +73,7 @@ export class CourseDto {
           subjectId: courseDto.subjectId,
           courseName: new CourseName(courseDto.courseName),
           classHours: new ClassHours(courseDto.classHours),
+          rowState: courseDto.rowState as RowState,
         });
       }
       default: {

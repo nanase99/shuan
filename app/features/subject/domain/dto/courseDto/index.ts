@@ -1,1 +1,0 @@
-export { CourseDto } from "./courseDto";
