@@ -1,12 +1,13 @@
 import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js";
 
+import { RowState } from "@/features/common/enums";
 import * as schema from "@/features/schema";
 import { SubjectDto } from "@/features/subject/domain/dto";
 import type {
   ISubjectRepository,
   Subject,
 } from "@/features/subject/domain/models";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import postgres from "postgres";
 
 export class LocalSubjectRepository implements ISubjectRepository {
@@ -20,7 +21,15 @@ export class LocalSubjectRepository implements ISubjectRepository {
       with: { courses: true },
     });
 
-    const res = data.map((subject) => SubjectDto.toDomain(subject));
+    const res = data.map((subject) =>
+      SubjectDto.toDomain({
+        ...subject,
+        courses: subject.courses.map((course) => ({
+          ...course,
+          rowState: RowState.Unchanged,
+        })),
+      }),
+    );
 
     return res;
   };
@@ -30,52 +39,81 @@ export class LocalSubjectRepository implements ISubjectRepository {
       where: (subjects, { eq }) => eq(subjects.id, id),
       with: { courses: true },
     });
-    const res = data ? SubjectDto.toDomain(data) : null;
+    const res = data
+      ? SubjectDto.toDomain({
+          ...data,
+          courses: data.courses.map((course) => ({
+            ...course,
+            rowState: RowState.Unchanged,
+          })),
+        })
+      : null;
     return res;
   };
 
-  create = async (subject: Subject) => {
+  save = async (subject: Subject) => {
     const subjectDto = SubjectDto.fromDomain(subject);
     const { courses: coursesData, ...subjectData } = subjectDto;
+    const createCourses = coursesData.filter(
+      (course) => course.rowState === RowState.Added,
+    );
+    const updateCourses = coursesData.filter(
+      (course) => course.rowState === RowState.Updated,
+    );
+    const deleteCourses = coursesData.filter(
+      (course) => course.rowState === RowState.Deleted,
+    );
 
-    const subjectsResult = await this._ormClient
-      .insert(schema.subjects)
-      .values(subjectData)
-      .returning();
-
-    const coursesResults = await this._ormClient
-      .insert(schema.courses)
-      .values(coursesData)
-      .returning();
+    const { subjectsResults, insertCoursesResults, updateCoursesResults } =
+      await this._ormClient.transaction(async (tx) => {
+        const [
+          subjectsResults,
+          _,
+          insertCoursesResults,
+          ...updateCoursesResults
+        ] = await Promise.all([
+          tx
+            .insert(schema.subjects)
+            .values(subjectData)
+            .onConflictDoUpdate({
+              target: schema.subjects.id,
+              set: subjectData,
+            })
+            .returning(),
+          tx.delete(schema.courses).where(
+            inArray(
+              schema.courses.id,
+              deleteCourses.map((c) => c.id),
+            ),
+          ),
+          createCourses.length !== 0
+            ? tx.insert(schema.courses).values(createCourses).returning()
+            : [],
+          ...updateCourses.map((course) =>
+            tx
+              .update(schema.courses)
+              .set(course)
+              .where(eq(schema.courses.id, course.id))
+              .returning(),
+          ),
+        ]);
+        return { subjectsResults, insertCoursesResults, updateCoursesResults };
+      });
 
     return SubjectDto.toDomain({
-      ...subjectsResult[0],
-      courses: coursesResults,
-    });
-  };
-
-  update = async (subject: Subject) => {
-    const subjectDto = SubjectDto.fromDomain(subject);
-    const { courses: coursesData, ...subjectData } = subjectDto;
-
-    const [subjectsResult, ...coursesResults] = await Promise.all([
-      this._ormClient
-        .update(schema.subjects)
-        .set(subjectData)
-        .where(eq(schema.subjects.id, subjectData.id))
-        .returning(),
-      ...coursesData.map((course) =>
-        this._ormClient
-          .update(schema.courses)
-          .set(course)
-          .where(eq(schema.courses.id, course.id))
-          .returning(),
-      ),
-    ]);
-
-    return SubjectDto.toDomain({
-      ...subjectsResult[0],
-      courses: coursesResults.flat(),
+      ...subjectsResults[0],
+      courses: [
+        ...insertCoursesResults.map((r) => ({
+          ...r,
+          rowState: RowState.Unchanged,
+        })),
+        ...updateCoursesResults.flatMap((r) =>
+          r.map((course) => ({
+            ...course,
+            rowState: RowState.Unchanged,
+          })),
+        ),
+      ],
     });
   };
 
