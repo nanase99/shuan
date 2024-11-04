@@ -1,0 +1,1 @@
+export { SaveSubjectUseCase } from "./saveSubjectUseCase";
