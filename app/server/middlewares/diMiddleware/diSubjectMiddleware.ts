@@ -3,12 +3,12 @@ import { env } from "hono/adapter";
 import { createMiddleware } from "hono/factory";
 
 import {
-  InMemorySubjectRepository,
   LocalSubjectRepository,
   MockSubjectRepository,
   NeonSubjectRepository,
 } from "@/features/subject/repositories";
 import { GetSubjectUseCase } from "@/features/subject/useCases";
+import { SaveSubjectUseCase } from "@/features/subject/useCases/saveSubjectUseCase";
 import { type ArgEnv, Repository, type ServerEnv } from "@/server/serverUtil";
 
 export function diSubjectMiddleware(): MiddlewareHandler {
@@ -23,9 +23,6 @@ export function diSubjectMiddleware(): MiddlewareHandler {
         case Repository.Mock: {
           return new MockSubjectRepository();
         }
-        case Repository.Memory: {
-          return new InMemorySubjectRepository();
-        }
         case Repository.Local: {
           return new LocalSubjectRepository(DATABASE_URL);
         }
@@ -39,6 +36,7 @@ export function diSubjectMiddleware(): MiddlewareHandler {
     })();
 
     c.set("getSubjectUseCase", new GetSubjectUseCase(repository));
+    c.set("saveSubjectUseCase", new SaveSubjectUseCase(repository));
     await next();
   });
 }

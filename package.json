@@ -6,7 +6,6 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "REPOSITORY_ENV=mock remix vite:dev",
-    "memory": "REPOSITORY_ENV=memory remix vite:dev",
     "local": "REPOSITORY_ENV=local remix vite:dev",
     "start": "wrangler pages dev ./build/client",
     "type": "tsc",
