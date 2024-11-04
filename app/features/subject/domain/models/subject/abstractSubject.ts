@@ -27,19 +27,19 @@ export abstract class AbstractSubject {
     this._courses = courses;
   }
 
-  get id(): string {
+  get id() {
     return this._id;
   }
 
-  get subjectName(): SubjectName {
+  get subjectName() {
     return this._subjectName;
   }
 
-  get classHours(): ClassHours {
+  get classHours() {
     return this._classHours;
   }
 
-  get courses(): Course[] {
+  get courses() {
     return this._courses;
   }
 }

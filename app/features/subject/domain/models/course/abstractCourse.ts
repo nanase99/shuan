@@ -1,3 +1,4 @@
+import type { RowState } from "@/features/common/enums";
 import type { ClassHours, CourseName } from "@/features/subject/domain/models";
 
 type Args = {
@@ -5,6 +6,7 @@ type Args = {
   subjectId: string;
   courseName: CourseName;
   classHours: ClassHours;
+  rowState: RowState;
 };
 
 export enum CourseTag {
@@ -18,12 +20,14 @@ export abstract class AbstractCourse {
   protected _courseName: CourseName;
   protected _classHours: ClassHours;
   protected abstract readonly tag: CourseTag;
+  protected _rowState: RowState;
 
-  constructor({ id, subjectId, courseName, classHours }: Args) {
+  constructor({ id, subjectId, courseName, classHours, rowState }: Args) {
     this._id = id;
     this._subjectId = subjectId;
     this._courseName = courseName;
     this._classHours = classHours;
+    this._rowState = rowState;
   }
 
   get id(): string {
@@ -40,5 +44,9 @@ export abstract class AbstractCourse {
 
   get classHours(): ClassHours {
     return this._classHours;
+  }
+
+  get rowState(): RowState {
+    return this._rowState;
   }
 }

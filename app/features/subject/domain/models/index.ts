@@ -10,7 +10,11 @@ export {
   UncompletedSubject,
   CompletedSubject,
   type Subject,
-  type ISubjectRepository,
 } from "./subject";
 
-export { ClassHours, CourseName, Progress, SubjectName } from "./valueObjects";
+export {
+  ClassHours,
+  CourseName,
+  Progress,
+  SubjectName,
+} from "./valueObjects";

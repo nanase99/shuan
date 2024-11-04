@@ -1,3 +1,4 @@
+import type { RowState } from "@/features/common/enums";
 import type {
   ClassHours,
   CourseName,
@@ -11,13 +12,21 @@ type Args = {
   courseName: CourseName;
   classHours: ClassHours;
   progress: Progress;
+  rowState: RowState;
 };
 export class UncompletedCourse extends AbstractCourse {
   private _progress: Progress;
   public override tag = CourseTag.Uncompleted;
 
-  constructor({ id, subjectId, courseName, classHours, progress }: Args) {
-    super({ id, subjectId, courseName, classHours });
+  constructor({
+    id,
+    subjectId,
+    courseName,
+    classHours,
+    progress,
+    rowState,
+  }: Args) {
+    super({ id, subjectId, courseName, classHours, rowState });
     this._progress = progress;
   }
 
