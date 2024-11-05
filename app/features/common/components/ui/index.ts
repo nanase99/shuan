@@ -8,5 +8,6 @@ export * from "./InputWithLabel";
 export * from "./Label";
 export * from "./Link";
 export * from "./NavButton";
+export * from "./Sonner";
 export * from "./Typography";
 export * from "./UserIcon";
