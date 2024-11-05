@@ -11,6 +11,7 @@ import { rootAuthLoader } from "@clerk/remix/ssr.server";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/cloudflare";
 
 import { QueryProvider } from "./features/common/components/providers";
+import { Sonner } from "./features/common/components/ui";
 import stylesheet from "./tailwind.css?url";
 
 export const links: LinksFunction = () => [
@@ -40,6 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <QueryProvider>
+      <Sonner />
       <Outlet />
     </QueryProvider>
   );
