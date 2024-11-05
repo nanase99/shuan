@@ -1,4 +1,4 @@
-import { subjectsRoute } from "@/features/subject/apiRoutes";
+import { subjectsRoute } from "@/features/subject/api";
 import type { Hono } from "hono";
 import type { ServerEnv } from "./serverUtil";
 
