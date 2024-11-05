@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import type { SubjectDto } from "@/features/subject/domain/dto";
+import type { SubjectSchemaType } from "../__hooks/useSubjectsForm";
 import { EditSubjectCard } from "./EditSubjectCard";
 import { ViewSubjectCard } from "./ViewSubjectCard";
 
 type Props = {
-  subject: SubjectDto;
+  subject: SubjectSchemaType;
   index: number;
   isView?: boolean;
   onSave: (index: number) => Promise<boolean>;

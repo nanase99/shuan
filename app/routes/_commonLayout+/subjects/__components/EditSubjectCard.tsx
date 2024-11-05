@@ -1,5 +1,4 @@
 import { Trash2 } from "lucide-react";
-import { Fragment } from "react";
 
 import {
   Button,
@@ -46,16 +45,11 @@ export function EditSubjectCard({ subjectIndex, onSave }: Props) {
           <Label className="font-semibold">時数</Label>
           {courseFields?.map((course, courseIndex) => {
             return (
-              <Fragment key={course.id}>
-                <FormInput
-                  name={`subjects.${subjectIndex}.courses.${courseIndex}.courseName`}
-                  className="text-base border-solid border-black bg-white/40"
-                />
-                <FormInput
-                  name={`subjects.${subjectIndex}.courses.${courseIndex}.classHours`}
-                  className="text-base border-solid border-black bg-white/40"
-                />
-              </Fragment>
+              <CourseDetail
+                key={course.id}
+                subjectIndex={subjectIndex}
+                courseIndex={courseIndex}
+              />
             );
           })}
         </CardContent>
@@ -69,5 +63,24 @@ export function EditSubjectCard({ subjectIndex, onSave }: Props) {
         </CardFooter>
       </Card>
     </form>
+  );
+}
+
+function CourseDetail({
+  subjectIndex,
+  courseIndex,
+}: { subjectIndex: number; courseIndex: number }) {
+  return (
+    <>
+      <FormInput
+        name={`subjects.${subjectIndex}.courses.${courseIndex}.courseName`}
+        className="text-base border-solid border-black bg-white/40"
+      />
+      <FormInput
+        inputMode="numeric"
+        name={`subjects.${subjectIndex}.courses.${courseIndex}.classHours`}
+        className="text-base border-solid border-black bg-white/40"
+      />
+    </>
   );
 }

@@ -8,10 +8,10 @@ import {
   Label,
   Typography,
 } from "@/features/common/components/ui";
-import type { SubjectDto } from "@/features/subject/domain/dto";
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
+import type { SubjectSchemaType } from "../__hooks/useSubjectsForm";
 
-type Props = { subject: SubjectDto; onEditClick: () => void };
+type Props = { subject: SubjectSchemaType; onEditClick: () => void };
 
 export function ViewSubjectCard({ subject, onEditClick }: Props) {
   return (
