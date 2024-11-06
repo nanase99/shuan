@@ -7,26 +7,24 @@ import { RowState } from "@/features/common/enums";
 import { genUuid } from "@/features/common/libs";
 import type { SubjectDto } from "@/features/subject/domain/dto";
 import { SubjectTag } from "@/features/subject/domain/models";
-import { fetchSaveSubject } from "@/features/subject/fetch/fetchPostSubject";
+import { useSaveSubject } from "@/features/subject/fetch/fetchPostSubject";
 
 export type SubjectsSchemaType = v.InferInput<typeof subjectsSchema>;
 export type SubjectSchemaType = v.InferInput<typeof subjectSchema>;
 export type CourseSchemaType = v.InferInput<typeof courseSchema>;
 
-export function useSubjectsForm(argSubjects: SubjectDto[]) {
-  const { useSaveSubject } = fetchSaveSubject();
+export function useSubjectsForm(argSubjects: SubjectDto[] = []) {
   const { mutate } = useSaveSubject();
 
-  const convertedSubjects =
-    argSubjects?.map((subject) => ({
-      ...subject,
-      classHours: subject.classHours.toString(),
-      courses: subject.courses.map((course) => ({
-        ...course,
-        classHours: course.classHours.toString(),
-        rowState: RowState.Unchanged,
-      })),
-    })) || [];
+  const convertedSubjects = argSubjects?.map((subject) => ({
+    ...subject,
+    classHours: subject.classHours.toString(),
+    courses: subject.courses.map((course) => ({
+      ...course,
+      classHours: course.classHours.toString(),
+      rowState: RowState.Unchanged,
+    })),
+  }));
 
   const form = useForm<SubjectsSchemaType>({
     mode: "onTouched",

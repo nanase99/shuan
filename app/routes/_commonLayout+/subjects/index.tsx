@@ -1,11 +1,12 @@
 import { json } from "@remix-run/cloudflare";
 
 import { AddButton, Form } from "@/features/common/components/ui";
-import { fetchGetSubjects } from "@/features/subject/fetch/fetchGetSubjects";
+import {
+  prefetchGetSubjects,
+  useGetSubjects,
+} from "@/features/subject/fetch/fetchGetSubjects";
 import { SubjectCard } from "./__components";
 import { useSubjectsForm } from "./__hooks/useSubjectsForm";
-
-const { useGetSubjects, prefetchGetSubjects } = fetchGetSubjects();
 
 export const loader = async () => {
   const res = await prefetchGetSubjects();

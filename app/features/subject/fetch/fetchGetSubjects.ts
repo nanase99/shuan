@@ -3,27 +3,23 @@ import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import { getApiClient } from "@/features/common/libs";
 import { subjectKeys } from "./subjectKeys";
 
-export function fetchGetSubjects() {
-  const useGetSubjects = () => {
-    const { data, isPending, isError } = useQuery({
-      queryKey: subjectKeys.all,
-      queryFn: fetcher,
-    });
-    return { data, isPending, isError };
-  };
+export function useGetSubjects() {
+  const { data, isPending, isError } = useQuery({
+    queryKey: subjectKeys.all,
+    queryFn: fetcher,
+  });
+  return { data, isPending, isError };
+}
 
-  const prefetchGetSubjects = async () => {
-    const queryClient = new QueryClient();
-    await queryClient.prefetchQuery({
-      queryKey: subjectKeys.all,
-      queryFn: fetcher,
-    });
-    return {
-      dehydratedState: dehydrate(queryClient),
-    };
+export async function prefetchGetSubjects() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: subjectKeys.all,
+    queryFn: fetcher,
+  });
+  return {
+    dehydratedState: dehydrate(queryClient),
   };
-
-  return { useGetSubjects, prefetchGetSubjects };
 }
 
 async function fetcher() {

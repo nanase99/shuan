@@ -9,22 +9,18 @@ type RequestType = InferRequestType<
   (typeof client.api.subjects)["$post"]
 >["json"];
 
-export function fetchSaveSubject() {
-  const useSaveSubject = () => {
-    const mutation = useMutation<ResponseType, Error, RequestType>({
-      mutationFn: async (json) => {
-        const response = await client.api.subjects.$post({ json });
-        return await response.json();
-      },
-      onSuccess: () => {
-        toast.success("保存しました");
-      },
-      onError: () => {
-        toast.error("保存に失敗しました");
-      },
-    });
-    return mutation;
-  };
-
-  return { useSaveSubject };
+export function useSaveSubject() {
+  const mutation = useMutation<ResponseType, Error, RequestType>({
+    mutationFn: async (json) => {
+      const response = await client.api.subjects.$post({ json });
+      return await response.json();
+    },
+    onSuccess: () => {
+      toast.success("保存しました");
+    },
+    onError: () => {
+      toast.error("保存に失敗しました");
+    },
+  });
+  return mutation;
 }
