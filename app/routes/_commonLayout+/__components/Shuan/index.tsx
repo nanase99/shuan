@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { ShuanHeader } from "./ShuanHeader";
 
-// TODO: 表記を変える
-const WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
 // TODO: 時間ではなくコマに変更する
-const TIME_SLOTS = Array.from(
-  { length: 24 },
-  (_, i) => `${i.toString().padStart(2, "0")}:00`,
-);
+const TIME_SLOTS = Array.from({ length: 5 }, (_, i) => `${i.toString()}`);
+
+enum WeekDays {
+  Mon = "月",
+  Tue = "火",
+  Wed = "水",
+  Thu = "木",
+  Fri = "金",
+  Sat = "土",
+}
 
 // TODO: propsで注入してもらう
 const events = [
@@ -55,11 +58,11 @@ export function Shuan() {
       <ShuanHeader currentWeek={currentWeek} />
       <div className="overflow-x-auto">
         <div className="inline-block min-w-full">
-          <div className="grid grid-cols-8">
+          <div className="grid grid-cols-7">
             <div className="sticky left-0 z-10"></div>
-            {WEEK_DAYS.map((day) => (
-              <div key={day} className="font-medium p-2">
-                {day}
+            {Object.entries(WeekDays).map(([key, value]) => (
+              <div key={key} className="font-medium p-2">
+                {value}
               </div>
             ))}
             {/* TODO: timeslot用のコンポーネントを作成する */}
@@ -71,15 +74,15 @@ export function Shuan() {
                 >
                   {time}
                 </div>
-                {WEEK_DAYS.map((day) => {
+                {Object.entries(WeekDays).map(([key, value]) => {
                   const event = events.find(
                     (e) =>
-                      e.day === day &&
+                      e.day === value &&
                       e.start === Number.parseInt(time.split(":")[0]),
                   );
                   return (
                     <div
-                      key={`${day}-${time}`}
+                      key={`${value}-${time}`}
                       className="border-t border-l h-12 relative"
                     >
                       {event && (
