@@ -19,7 +19,7 @@ export class MockSubjectRepository implements ISubjectRepository {
   create = async (subject: Subject) => subject;
   update = async (subject: Subject) => subject;
   save = async (subject: Subject) => subject;
-  delete = async (id: string) => {};
+  delete = async (id: string) => id;
   deleteMany = async () => {};
 }
 

@@ -113,18 +113,24 @@ export class NeonSubjectRepository implements ISubjectRepository {
       ],
     });
   };
+
   delete = async (id: string) => {
     const targetSubject = await this.find(id);
-    if (targetSubject === null) return;
+    if (targetSubject === null) throw new Error("Subject not found");
 
-    await Promise.all([
-      this._ormClient.delete(schema.subjects).where(eq(schema.subjects.id, id)),
-      ...targetSubject.courses.map((course) =>
-        this._ormClient
-          .delete(schema.courses)
-          .where(eq(schema.courses.id, course.id)),
-      ),
-    ]);
+    const deletedId = await this._ormClient.transaction(async (tx) => {
+      const [[deletedSubject]] = await Promise.all([
+        tx
+          .delete(schema.subjects)
+          .where(eq(schema.subjects.id, id))
+          .returning({ id: schema.subjects.id }),
+        ...targetSubject.courses.map((course) =>
+          tx.delete(schema.courses).where(eq(schema.courses.id, course.id)),
+        ),
+      ]);
+      return deletedSubject.id;
+    });
+    return deletedId;
   };
 
   deleteMany = async () => {
