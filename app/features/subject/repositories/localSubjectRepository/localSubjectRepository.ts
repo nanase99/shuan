@@ -3,12 +3,10 @@ import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js";
 import { RowState } from "@/features/common/enums";
 import * as schema from "@/features/schema";
 import { SubjectDto } from "@/features/subject/domain/dto";
-import type {
-  ISubjectRepository,
-  Subject,
-} from "@/features/subject/domain/models";
+import type { Subject } from "@/features/subject/domain/models";
 import { eq, inArray } from "drizzle-orm";
 import postgres from "postgres";
+import type { ISubjectRepository } from "../ISubjectRepository";
 
 export class LocalSubjectRepository implements ISubjectRepository {
   private _ormClient: PostgresJsDatabase<typeof schema>;

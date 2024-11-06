@@ -1,5 +1,5 @@
 import { SubjectDto } from "@/features/subject/domain/dto";
-import type { ISubjectRepository } from "@/features/subject/domain/models";
+import type { ISubjectRepository } from "../../repositories/ISubjectRepository";
 
 export class GetSubjectUseCase {
   private _repository: ISubjectRepository;

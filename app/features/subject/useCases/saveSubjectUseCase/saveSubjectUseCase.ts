@@ -1,10 +1,7 @@
 import type { RowState } from "@/features/common/enums";
 import { SubjectDto } from "@/features/subject/domain/dto";
-import type {
-  CourseTag,
-  ISubjectRepository,
-  SubjectTag,
-} from "@/features/subject/domain/models";
+import type { CourseTag, SubjectTag } from "@/features/subject/domain/models";
+import type { ISubjectRepository } from "../../repositories/ISubjectRepository";
 
 export type SaveSubjectCommand = {
   id: string;

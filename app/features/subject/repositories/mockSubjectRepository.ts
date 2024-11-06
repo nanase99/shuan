@@ -1,7 +1,5 @@
-import type {
-  ISubjectRepository,
-  Subject,
-} from "@/features/subject/domain/models";
+import { RowState } from "@/features/common/enums";
+import type { Subject } from "@/features/subject/domain/models";
 import {
   ClassHours,
   CompletedCourse,
@@ -12,6 +10,7 @@ import {
   UncompletedCourse,
   UncompletedSubject,
 } from "@/features/subject/domain/models";
+import type { ISubjectRepository } from "./ISubjectRepository";
 
 export class MockSubjectRepository implements ISubjectRepository {
   findMany = async () => mockSubjects;
@@ -19,6 +18,7 @@ export class MockSubjectRepository implements ISubjectRepository {
     mockSubjects.find((subject) => subject.id === id) || null;
   create = async (subject: Subject) => subject;
   update = async (subject: Subject) => subject;
+  save = async (subject: Subject) => subject;
   delete = async (id: string) => {};
   deleteMany = async () => {};
 }
@@ -35,6 +35,7 @@ const mockSubjects: Subject[] = [
         subjectId: "3539fc2e-c005-49bc-a12a-91bd4745e1a4",
         courseName: new CourseName("おおきなかぶ"),
         classHours: new ClassHours(5),
+        rowState: RowState.Unchanged,
       }),
       new UncompletedCourse({
         id: "d55a6dfc-97f7-43e1-9b45-995c8bf50de5",
@@ -42,6 +43,7 @@ const mockSubjects: Subject[] = [
         courseName: new CourseName("ポプラの木"),
         classHours: new ClassHours(6),
         progress: new Progress(3),
+        rowState: RowState.Added,
       }),
     ],
   }),
@@ -55,12 +57,14 @@ const mockSubjects: Subject[] = [
         subjectId: "a43728a6-7dc6-43bc-a73c-668418106980",
         courseName: new CourseName("足し算"),
         classHours: new ClassHours(7),
+        rowState: RowState.Unchanged,
       }),
       new CompletedCourse({
         id: "31f1f3b3-77cf-45fe-a578-99165b303d7b",
         subjectId: "a43728a6-7dc6-43bc-a73c-668418106980",
         courseName: new CourseName("引き算"),
         classHours: new ClassHours(5),
+        rowState: RowState.Unchanged,
       }),
     ],
   }),
