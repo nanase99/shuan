@@ -7,6 +7,7 @@ import { RowState } from "@/features/common/enums";
 import { genUuid } from "@/features/common/libs";
 import type { SubjectDto } from "@/features/subject/domain/dto";
 import { SubjectTag } from "@/features/subject/domain/models";
+import { useDeleteSubject } from "@/features/subject/fetch/fetchDeleteSubject";
 import { useSaveSubject } from "@/features/subject/fetch/fetchPostSubject";
 
 export type SubjectsSchemaType = v.InferInput<typeof subjectsSchema>;
@@ -14,7 +15,8 @@ export type SubjectSchemaType = v.InferInput<typeof subjectSchema>;
 export type CourseSchemaType = v.InferInput<typeof courseSchema>;
 
 export function useSubjectsForm(argSubjects: SubjectDto[] = []) {
-  const { mutate } = useSaveSubject();
+  const saveMutation = useSaveSubject();
+  const deleteMutation = useDeleteSubject();
 
   const convertedSubjects = argSubjects?.map((subject) => ({
     ...subject,
@@ -47,11 +49,18 @@ export function useSubjectsForm(argSubjects: SubjectDto[] = []) {
 
       if (!validateRes || !data.success) return false;
 
-      const res = await mutate(data.output);
+      const res = await saveMutation.mutate(data.output);
 
       return false;
     },
-    [form, mutate],
+    [form, saveMutation],
+  );
+  const handleDelete = useCallback(
+    async (index: number) => {
+      const id = form.getValues(`subjects.${index}.id`);
+      const ok = await deleteMutation.mutate(id);
+    },
+    [form, deleteMutation],
   );
 
   const handleAddSubject = useCallback(() => {
@@ -71,6 +80,7 @@ export function useSubjectsForm(argSubjects: SubjectDto[] = []) {
     form,
     subjectFields,
     handleSave,
+    handleDelete,
     handleAddSubject,
   };
 }
